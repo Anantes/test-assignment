@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col mb-3">
+    <h3>Match actors and their movies</h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-4 mb-3">
+    <label for="typeahead-actors">Type actor's name:</label>
+    <input
+      id="typeahead-actors"
+      type="text"
+      class="form-control"
+      [ngbTypeahead]="search"
+      [(ngModel)]="typeahead"
+      (ngModelChange)="filterMoviesByActor($event)"
+    />
+  </div>
+</div>
+
+<hr />
+
+<div class="row">
+  <div class="col mb-3">
+    <h3>Path to Tom Cruise</h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col" id="pathToActor">
+    {{ pathToTomCruise }}
+  </div>
+</div>
+
+<hr />
+
+<div class="row">
+  <div class="col mb-3">
+    <h3>Movies with casts</h3>
+  </div>
+</div>
+
+<div class="row align-items-stretch" *ngIf="movies; else noData">
+  <div class="col-4 mb-3" *ngFor="let movie of moviesByActor">
+    <app-movie [title]="movie.title" [cast]="movie.cast"></app-movie>
+  </div>
+</div>
+
+<ng-template #noData> There were no movies found </ng-template>
